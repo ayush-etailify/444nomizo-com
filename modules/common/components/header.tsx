@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeaderCart from "./header-cart";
 
 export default function Header() {
   return (
@@ -7,6 +8,9 @@ export default function Header() {
         <Link href="/" className="font-semibold">
           444Nomizo
         </Link>
+        <nav>
+          <HeaderCart />
+        </nav>
       </div>
     </header>
   );

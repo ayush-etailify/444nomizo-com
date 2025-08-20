@@ -11,18 +11,18 @@ export default function TermsAndConditionsPage() {
         </p>
 
         <p>
-          https://www.westmore.etailify.io/ (“Website”) is owned and operated by
-          Etailify Limited (“Etailify”), a company incorporated under the Indian
-          Companies Act, having its registered office at 28, 15th Cross, A
-          Block, Bhuvaneshwari Nagar, Magadi Road, Bangalore, Bangalore North,
+          https://www.444Nomizo.etailify.io/ (“Website”) is owned and operated
+          by Etailify Limited (“Etailify”), a company incorporated under the
+          Indian Companies Act, having its registered office at 28, 15th Cross,
+          A Block, Bhuvaneshwari Nagar, Magadi Road, Bangalore, Bangalore North,
           Karnataka, India, 560023.
         </p>
 
         <p>
           This document (together with the documents mentioned herein)
           establishes the general terms and conditions that govern the use of
-          the Website (www.westmore.etailify.io) and the purchase of products on
-          it (hereinafter referred to as the &quot;Conditions&quot;).
+          the Website (www.444Nomizo.etailify.io) and the purchase of products
+          on it (hereinafter referred to as the &quot;Conditions&quot;).
         </p>
 
         <p>

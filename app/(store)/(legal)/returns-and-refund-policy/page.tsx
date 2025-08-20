@@ -5,7 +5,7 @@ export default function ReturnsAndRefundPolicyPage() {
         Returns and Refund Policy
       </h2>
       <article className="space-y-4 mt-6">
-        <p>Thank you for shopping at westmore.etailify.io.</p>
+        <p>Thank you for shopping at 444Nomizo.etailify.io.</p>
 
         <p>
           If for any reason, you are not completely satisfied with a purchase,

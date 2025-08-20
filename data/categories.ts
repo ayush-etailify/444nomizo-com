@@ -1,4 +1,3 @@
-import { sdk } from "@/lib/config";
 import { Category } from "@/lib/types/categories";
 import { SearchParams, SearchResponse } from "@/lib/types/common";
 import { Product } from "@/lib/types/products";
@@ -18,7 +17,7 @@ export const searchCategoriesQueryFn = async ({
         page: page,
         size: size,
       }),
-    }
+    },
   );
 
   if (!response.ok) {
@@ -31,7 +30,7 @@ export const searchCategoriesQueryFn = async ({
 
 export const getCategoryProductsQueryFn = async (
   slug: string,
-  { page = 0, size = 10 }: SearchParams
+  { page = 0, size = 10 }: SearchParams,
 ) => {
   const response = await fetch(
     `${process.env.STOREFRONT_BASE_API_URL}/store_svc/v1/categories/${slug}/products/search`,
@@ -44,7 +43,7 @@ export const getCategoryProductsQueryFn = async (
         page: page,
         size: size,
       }),
-    }
+    },
   );
 
   if (!response.ok) {

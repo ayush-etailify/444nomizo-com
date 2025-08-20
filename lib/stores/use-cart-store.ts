@@ -15,32 +15,8 @@ export type CartItem = {
   };
 };
 
-export type CurrentOrder = {
-  uuid: string;
-  order_status: string;
-  products: any[];
-  cancelled_products: any[];
-  bill: {
-    product_total: string;
-    tax_total: string;
-    discount_total: string;
-    charge_total: string;
-    gross_total: string;
-    net_total: string;
-  };
-  customer: {
-    uuid: string;
-    order_id: string;
-    customer_id: string;
-    customer: any;
-    addresses: [];
-  };
-};
-
 type CartStore = {
-  items: CartItem[]; // not
-  currentOrder: CurrentOrder | null | undefined; // logged
-  setCurrentOrder: (currentOrder: CurrentOrder) => void;
+  items: CartItem[];
   addItem: (item: CartItem) => void;
   removeItem: (product_id: string, skuId: string) => void;
   updateQuantity: (productId: string, skuId: string, quantity: string) => void;
@@ -52,8 +28,6 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
-      currentOrder: null,
-      setCurrentOrder: (currentOrder: CurrentOrder) => set({ currentOrder }),
       addItem: (item) =>
         set((state) => {
           const existingItem = state.items.find(
@@ -92,18 +66,15 @@ export const useCartStore = create<CartStore>()(
               : item
           ),
         })),
-      clearCart: () => set({ items: [], currentOrder: null }),
+      clearCart: () => set({ items: [] }),
       getTotal: () =>
         get().items.reduce((acc, item) => {
           return acc + Number(item.meta.selling_price) * Number(item.quantity);
         }, 0),
     }),
     {
-      name: "cartStore",
-      partialize: (state) => ({
-        items: state.items,
-        currentOrder: state.currentOrder,
-      }),
+      name: "cart-store",
+      partialize: (state) => ({ items: state.items }),
     }
   )
 );

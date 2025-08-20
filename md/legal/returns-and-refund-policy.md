@@ -1,6 +1,6 @@
 # Returns and Refund Policy
 
-Thank you for shopping at westmore.etailify.io.
+Thank you for shopping at 444Nomizo.etailify.io.
 
 If for any reason, you are not completely satisfied with a purchase, we invite you to review our policy on Returns and Exchanges.
 

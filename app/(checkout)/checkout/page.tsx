@@ -1,17 +1,22 @@
 "use client";
 
-import { sdk } from "@/lib/config";
+import { loginWithOTPQueryFn, validateOTPLoginQueryFn } from "@/data/auth";
+import {
+  createOrderQueryFn,
+  initializePaymentQueryFn,
+  upsertDeliveryAddressQueryFn,
+} from "@/data/checkout";
 import { useCartStore } from "@/lib/stores/use-cart-store";
 import { Button } from "@/lib/ui/button";
 import Input from "@/lib/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/lib/ui/input-otp";
-import { getCustomerData, isCustomerLoggedIn } from "@/lib/utils/common";
+import { setTokens } from "@/lib/utils/auth";
 import { readPrice } from "@/lib/utils/text-format";
 import { Loader2Icon, ShieldCheckIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const CHECKOUT_STEPS = {
   LOGIN: "LOGIN",
@@ -20,8 +25,7 @@ const CHECKOUT_STEPS = {
 } as const;
 
 export default function CheckoutPage() {
-  const { items, clearCart, getTotal, currentOrder, setCurrentOrder } =
-    useCartStore();
+  const { items, clearCart, getTotal } = useCartStore();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -69,15 +73,15 @@ export default function CheckoutPage() {
       return;
     }
 
-    const otpResponse = await sdk.auth.login.otpLoginWithPhone({
+    const response = await loginWithOTPQueryFn({
       phone_number: phoneNumber,
       channel: "OTP_COMMUNICATION_CHANNEL_SMS",
     });
 
-    if (otpResponse.otp_response.response.otp) {
+    if (response.otp_response.response.otp) {
       setOtp({
         otp: "",
-        otp_id: otpResponse.otp_response.response.uuid,
+        otp_id: response.otp_response.response.uuid,
       });
     }
     setIsSubmitting(false);
@@ -91,22 +95,28 @@ export default function CheckoutPage() {
 
     setIsSubmitting(true);
 
-    const otpValidationResponse = await sdk.auth.login.verifyOtpWithPhone({
+    const otpValidationResponse = await validateOTPLoginQueryFn({
       otp: otp.otp,
       otp_id: otp.otp_id,
       phone_number: phoneNumber,
     });
 
-    const currentCustomerOrder = await sdk.customer.order.getOrders();
-    if (currentCustomerOrder) {
-      setCurrentOrder(currentCustomerOrder);
-    }
-
     if (otpValidationResponse.token_response.response.access_token) {
       const customer =
         otpValidationResponse.token_response.response.user.customer;
 
-      const orderResponse = await sdk.customer.order.createOrder(items);
+      setTokens(
+        otpValidationResponse.token_response.response.access_token,
+        otpValidationResponse.token_response.response.refresh_token
+      );
+
+      if (!items.length) {
+        setIsSubmitting(false);
+        alert("Please add items to the cart");
+        return;
+      }
+
+      const orderResponse = await createOrderQueryFn(items);
 
       if (orderResponse.bill) {
         setBillData(orderResponse.bill);
@@ -139,19 +149,15 @@ export default function CheckoutPage() {
   const onAddressSubmit = async () => {
     try {
       setIsSubmitting(true);
-      const response = await sdk.customer.account.upsertDeliveryAddress(
-        orderData.uuid,
-        {
-          first_name: customerData.first_name,
-          last_name: customerData.last_name,
-          addresses: [
-            {
-              address: addressData,
-            },
-          ],
-        }
-      );
-
+      const response = await upsertDeliveryAddressQueryFn(orderData.uuid, {
+        first_name: customerData.first_name,
+        last_name: customerData.last_name,
+        addresses: [
+          {
+            address: addressData,
+          },
+        ],
+      });
       if (response.bill) {
         setBillData(response.bill);
         setOrderData(response);
@@ -167,9 +173,7 @@ export default function CheckoutPage() {
   const onPaymentSubmit = async () => {
     try {
       setIsSubmitting(true);
-      const response = await sdk.customer.order.initializePayment(
-        orderData.uuid
-      );
+      const response = await initializePaymentQueryFn(orderData.uuid);
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: response.getAmount(),
@@ -201,27 +205,6 @@ export default function CheckoutPage() {
       setIsSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    const customerData = getCustomerData();
-
-    if (!isCustomerLoggedIn() || !customerData) return;
-    setCurrentStep(CHECKOUT_STEPS.SHIPPING);
-    setCustomerData(customerData);
-    setAddressData({
-      address_line_1: customerData.addresses[0].address.address_line_1,
-      address_line_2: customerData.addresses[0].address.address_line_2,
-      city: customerData.addresses[0].address.city,
-      region: customerData.addresses[0].address.region,
-      country: customerData.addresses[0].address.country,
-      zip_code: customerData.addresses[0].address.zip_code,
-    });
-
-    if (currentOrder) {
-      setBillData(currentOrder.bill);
-      setOrderData(currentOrder);
-    }
-  }, [isCustomerLoggedIn, currentOrder]);
 
   if (!items || !items?.length) {
     return (
@@ -409,7 +392,6 @@ export default function CheckoutPage() {
                           onChange={(value) =>
                             setOtp((prev) => ({ ...prev, otp: value }))
                           }
-                          autoFocus
                         >
                           {Array.from({ length: 6 }).map((_, index) => (
                             <InputOTPGroup key={index}>
@@ -446,11 +428,9 @@ export default function CheckoutPage() {
                 >
                   <div className="flex gap-2 sm:flex-row flex-col justify-between">
                     <h3 className="text-xl font-medium">Shipping</h3>
-                    {phoneNumber && (
-                      <span className="text-xs text-stone-500">
-                        Logged in with {phoneNumber}
-                      </span>
-                    )}
+                    <span className="text-xs text-stone-500">
+                      Logged in with {phoneNumber}
+                    </span>
                   </div>
                   <div className="mt-6 grid grid-cols-2 gap-4">
                     <label className="flex flex-col gap-2">

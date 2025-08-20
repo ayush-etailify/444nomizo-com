@@ -2,9 +2,9 @@
 
 This document is an electronic record as contemplated under section 2(t) of the Information Technology Act, 2000 and the rules thereunder.
 
-https://www.westmore.etailify.io/ (“Website”) is owned and operated by Etailify Limited (“Etailify”), a company incorporated under the Indian Companies Act, 1913 vide CIN: L24240MH1952PLC008951, having its registered office at 28, 15th Cross, A Block, Bhuvaneshwari Nagar, Magadi Road, Bangalore, Bangalore North, Karnataka, India, 560023.
+https://www.444Nomizo.etailify.io/ (“Website”) is owned and operated by Etailify Limited (“Etailify”), a company incorporated under the Indian Companies Act, 1913 vide CIN: L24240MH1952PLC008951, having its registered office at 28, 15th Cross, A Block, Bhuvaneshwari Nagar, Magadi Road, Bangalore, Bangalore North, Karnataka, India, 560023.
 
-This document (together with the documents mentioned herein) establishes the general terms and conditions that govern the use of the Website (www.westmore.etailify.io) and the purchase of products on it (hereinafter referred to as the "Conditions").
+This document (together with the documents mentioned herein) establishes the general terms and conditions that govern the use of the Website (www.444Nomizo.etailify.io) and the purchase of products on it (hereinafter referred to as the "Conditions").
 
 For the purpose of this document, "User" / "Users" shall mean any person/persons and/or legal entity(ies) who visit(s), uses, deals with and/or transact at the Website in any way.
 

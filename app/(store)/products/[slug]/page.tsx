@@ -1,5 +1,4 @@
 import { getProductBySlugQueryFn } from "@/data/products";
-import { sdk } from "@/lib/config";
 import { PageProps } from "@/lib/types/common";
 import { calculateDiscountPercentage } from "@/lib/utils/discounts";
 import { readPrice } from "@/lib/utils/text-format";
@@ -29,7 +28,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function ProductsDetailPage(props: PageProps) {
   const { slug } = await props.params;
-  const product = await sdk.store.products.getProductBySlug(slug);
+  const product = await getProductBySlugQueryFn(slug);
 
   return (
     <div className="container min-h-screen py-8">

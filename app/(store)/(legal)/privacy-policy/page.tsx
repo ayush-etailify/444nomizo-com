@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
             <strong>Company</strong> (referred to as either &#39;the
             Company&#39;, &#39;We&#39;, &#39;Us&#39; or &#39;Our&#39; in this
             Agreement) Etailify Technologies Pvt. Ltd. and the website
-            www.westmore.etailify.io
+            www.444Nomizo.etailify.io
           </li>
           <li>
             <strong>Cookies</strong> are small files that are placed on Your
@@ -82,7 +82,7 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <strong>Website</strong> refers to Etailify Technologies Pvt. Ltd.,
-            accessible from www.westmore.etailify.io
+            accessible from www.444Nomizo.etailify.io
           </li>
           <li>
             <strong>You</strong> means the individual accessing or using the

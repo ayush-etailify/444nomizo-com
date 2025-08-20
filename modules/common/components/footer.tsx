@@ -3,7 +3,13 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="border-t border-stone-200 py-8 text-sm">
-      <div className="container flex flex-col sm:flex-row justify-between gap-4">
+      <div className="container">
+        <div className="text-center">
+          K Cast, E-10/7915/1A, STREET NO-2, DHANRAJ NAGAR, BAHADUE KE ROAD,
+          PINCODE - 141008 LUDHIANA
+        </div>
+      </div>
+      <div className="container flex flex-col sm:flex-row justify-between gap-4 mt-4">
         <div>
           &copy; {new Date().getFullYear()}{" "}
           <span className="font-semibold tracking-wider uppercase">
