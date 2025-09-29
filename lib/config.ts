@@ -2,6 +2,6 @@ import { EtailifyStorefrontSDK } from "@/packages/storefront-sdk";
 
 export const sdk = new EtailifyStorefrontSDK({
   baseUrl: "https://customerapis.staging.etailify.io",
-  storeSlug: "444nomizo-1",
-  storeId: "f635090f-adce-4bb8-8735-8debf7241f76",
+  storeSlug: "444nomizo-5",
+  storeId: "3e85b8d0-8aa0-4641-afa0-ae57249865ab",
 });
