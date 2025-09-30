@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #ebf8ff;
+  --color-brand-100: #d5f1ff;
+  --color-brand-200: #c0eaff;
+  --color-brand-300: #97dcff;
+  --color-brand-400: #68cdff;
+  --color-brand-500: #47c2ff;
+  --color-brand-600: #35ade9;
+  --color-brand-700: #2597d0;
+  --color-brand-800: #1f7ead;
+  --color-brand-900: #18658b;
+  --color-brand-950: #124b68;
+}
+
+@utility container {
+  margin-inline: auto;
+  max-width: theme(maxWidth.6xl);
+  padding-inline: theme(spacing.4);
+}
+
+article h3 {
+  @apply font-medium text-lg uppercase;
+}

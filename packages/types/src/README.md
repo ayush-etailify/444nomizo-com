@@ -1,0 +1,22 @@
+```
+/modules
+  /common
+    index.ts
+    http-types.ts // HttpTypes
+  /store-svc
+    catalog
+      variation-groups.ts
+      categories.ts
+      products.ts
+      metadata.ts
+    members
+      users.ts
+      roles.ts
+  /token-svc
+    customer.ts
+    partner.ts
+  /customer-order-svc
+    index.ts
+  /store-order-svc
+    index.ts
+```

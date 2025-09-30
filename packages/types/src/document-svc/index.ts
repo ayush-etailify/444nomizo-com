@@ -1,0 +1,26 @@
+export enum MediaType {
+  MEDIA_TYPE_IMAGE = "MEDIA_TYPE_IMAGE",
+  MEDIA_TYPE_VIDEO = "MEDIA_TYPE_VIDEO",
+  MEDIA_TYPE_AUDIO = "MEDIA_TYPE_AUDIO",
+  MEDIA_TYPE_DOCUMENT = "MEDIA_TYPE_DOCUMENT",
+}
+
+export enum MimeType {
+  MIME_TYPE_INVALID = "MIME_TYPE_INVALID",
+  MIME_TYPE_PDF = "MIME_TYPE_PDF",
+  MIME_TYPE_JPEG = "MIME_TYPE_JPEG",
+  MIME_TYPE_PNG = "MIME_TYPE_PNG",
+  MIME_TYPE_WEBP = "MIME_TYPE_WEBP",
+  MIME_TYPE_MP4 = "MIME_TYPE_MP4",
+  MIME_TYPE_SVG = "MIME_TYPE_SVG",
+  MIME_TYPE_MP3 = "MIME_TYPE_MP3",
+  MIME_TYPE_WAV = "MIME_TYPE_WAV",
+  MIME_TYPE_DOCX = "MIME_TYPE_DOCX",
+}
+
+export type Media = {
+  media_type: MediaType;
+  mime_type: MimeType;
+  media_name: string;
+  media_public_url?: string;
+};
