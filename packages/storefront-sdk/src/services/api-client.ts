@@ -43,6 +43,8 @@ export class ApiClient {
 
         const accessToken = this.tokenManager.getAccessToken();
         if (accessToken) request.headers["Authorization"] = `${accessToken}`;
+        // hot-fix: temporary for passing browser get calls via ngrok
+        request.headers["ngrok-skip-browser-warning"] = "true";
         return request;
       },
       (error: AxiosError): Promise<AxiosError> => {
